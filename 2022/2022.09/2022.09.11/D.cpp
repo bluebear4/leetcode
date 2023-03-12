@@ -32,14 +32,14 @@ class Solution {
             pushup(root);
         }
 
-        void updata(int l, int r, int val, int root = 1) {
+        void update(int l, int r, int val, int root = 1) {
             if (l <= tree[root].l && r >= tree[root].r) {
                 tree[root].max = val;
                 return;
             }
             int mid = (tree[root].l + tree[root].r) >> 1;
-            if (l <= mid) updata(l, r, val, root << 1);
-            if (r > mid) updata(l, r, val, root << 1 | 1);
+            if (l <= mid) update(l, r, val, root << 1);
+            if (r > mid) update(l, r, val, root << 1 | 1);
             pushup(root);
         }
 
@@ -63,7 +63,7 @@ class Solution {
         for (auto& it : nums) {
             int val = T.query(it - k, it - 1) + 1;
             ans = max(ans, val);
-            T.updata(it, it, val);
+            T.update(it, it, val);
         }
         return ans;
     }
